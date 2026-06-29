@@ -1,6 +1,14 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+
+const ROLES = [
+  'Electronics Engineer',
+  'Robotics Enthusiast',
+  'Automation Architect',
+  'Backend Developer',
+]
 
 function CornerBracket({ position }: { position: 'tl' | 'tr' | 'bl' | 'br' }) {
   const isTop  = position[0] === 't'
@@ -19,6 +27,37 @@ function CornerBracket({ position }: { position: 'tl' | 'tr' | 'bl' | 'br' }) {
 }
 
 export default function Hero() {
+  const [text, setText]       = useState('')
+  const [roleIdx, setRoleIdx] = useState(0)
+  const [phase, setPhase]     = useState<'typing' | 'pause' | 'deleting'>('typing')
+
+  useEffect(() => {
+    const role = ROLES[roleIdx]
+
+    if (phase === 'typing') {
+      if (text.length < role.length) {
+        const t = setTimeout(() => setText(role.slice(0, text.length + 1)), 80)
+        return () => clearTimeout(t)
+      }
+      const t = setTimeout(() => setPhase('pause'), 1500)
+      return () => clearTimeout(t)
+    }
+
+    if (phase === 'pause') {
+      const t = setTimeout(() => setPhase('deleting'), 400)
+      return () => clearTimeout(t)
+    }
+
+    if (phase === 'deleting') {
+      if (text.length > 0) {
+        const t = setTimeout(() => setText(text.slice(0, -1)), 40)
+        return () => clearTimeout(t)
+      }
+      setRoleIdx((roleIdx + 1) % ROLES.length)
+      setPhase('typing')
+    }
+  }, [text, phase, roleIdx])
+
   return (
     <section className="hero-section">
 
@@ -50,15 +89,48 @@ export default function Hero() {
         I AM
       </motion.div>
 
-      {/* Giant name — always in flex flow, centered by flex container */}
-      <motion.h1
-        className="bebas hero-name"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.7 }}
-      >
-        SHARAVANAN R
-      </motion.h1>
+      {/* Spacer — pushes name+typing down equally from I AM */}
+      <div className="hero-space" />
+
+      {/* Name + typing */}
+      <div className="hero-name-typing-wrap">
+        <motion.h1
+          className="bebas hero-name"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+        >
+          SHARAVANAN R
+        </motion.h1>
+
+        {/* Typing animation — mobile only (hidden on desktop via CSS) */}
+        <motion.div
+          className="hero-typing"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 1.1 }}
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 13,
+            color: '#C0C0C0',
+            letterSpacing: '0.08em',
+          }}
+        >
+          {text}
+          <span style={{
+            display: 'inline-block',
+            width: 1,
+            height: '1em',
+            background: '#FFD700',
+            marginLeft: 2,
+            verticalAlign: 'middle',
+            animation: 'blink 0.8s step-start infinite',
+          }} />
+        </motion.div>
+      </div>
+
+      {/* Spacer — equal gap below name+typing before photo */}
+      <div className="hero-space" />
 
       {/* Photo */}
       <motion.div

@@ -110,34 +110,47 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile fullscreen overlay */}
+      {/* Mobile dropdown — compact panel below hamburger */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2, ease: 'linear' }}
+            initial={{ opacity: 0, y: -6, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -6, scale: 0.97 }}
+            transition={{ duration: 0.15, ease: 'linear' }}
             style={{
               position: 'fixed',
-              inset: 0,
-              background: 'rgba(5,5,5,0.97)',
+              top: 68,
+              right: 16,
               zIndex: 90,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 40,
+              minWidth: 180,
+              background: 'rgba(8,8,8,0.96)',
+              backdropFilter: 'blur(24px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+              border: '1px solid rgba(255,255,255,0.12)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.55)',
             }}
           >
-            {MOBILE_LINKS.map(({ label, href }) => (
+            {MOBILE_LINKS.map(({ label, href }, i) => (
               <a
                 key={label}
                 href={href}
                 onClick={(e) => handleScroll(e, href)}
-                style={{ fontFamily: 'var(--font-bebas)', fontSize: 48, color: '#FFFFFF', letterSpacing: '0.05em', textDecoration: 'none', transition: 'color 150ms linear' }}
-                onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = GOLD)}
-                onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = '#FFFFFF')}
+                style={{
+                  display: 'block',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 11,
+                  color: '#A0A0A0',
+                  letterSpacing: '0.15em',
+                  textDecoration: 'none',
+                  padding: '13px 20px',
+                  borderBottom: i < MOBILE_LINKS.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                  transition: 'color 150ms linear',
+                }}
+                onTouchStart={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = GOLD)}
+                onTouchEnd={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = '#A0A0A0')}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = GOLD)}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = '#A0A0A0')}
               >
                 {label}
               </a>

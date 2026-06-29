@@ -158,10 +158,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 12 }}
-      transition={{ duration: 0.3, ease: 'linear', delay: index * 0.08 }}
+      viewport={{ once: false, amount: 0.1 }}
+      transition={{ duration: 0.35, ease: 'linear', delay: index * 0.08 }}
       className={`proj-card${project.featured ? ' proj-card--featured' : ''}`}
     >
       {/* Category + status row */}
@@ -240,40 +241,47 @@ export default function Projects() {
   return (
     <section className="proj-section">
       <div className="proj-inner">
-        {/* Heading */}
-        <div className="mono" style={{ fontSize: 11, color: '#FFD700', letterSpacing: '0.2em', marginBottom: 8 }}>
-          // SELECTED WORK
-        </div>
-        <h2 className="bebas proj-heading">PROJECTS.</h2>
-        <div className="mono proj-count">
-          08 PROJECTS // HARDWARE · BACKEND · FULLSTACK
-        </div>
-
-        {/* Filter bar */}
-        <div className="filter-bar">
-          <div className="filter-buttons">
-            {FILTERS.map(f => (
-              <button
-                key={f}
-                onClick={() => setActiveFilter(f)}
-                className="mono"
-                style={{
-                  fontSize: 10,
-                  padding: '8px 16px',
-                  background: 'transparent',
-                  border: `1px solid ${activeFilter === f ? '#FFD700' : 'rgba(255,255,255,0.12)'}`,
-                  color: activeFilter === f ? '#FFD700' : '#A0A0A0',
-                  cursor: 'pointer',
-                  whiteSpace: 'nowrap',
-                  borderRadius: 0,
-                  transition: 'all 150ms linear',
-                }}
-              >
-                {f}
-              </button>
-            ))}
+        {/* Heading + filter */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="mono" style={{ fontSize: 11, color: '#FFD700', letterSpacing: '0.2em', marginBottom: 8 }}>
+            SELECTED WORK
           </div>
-        </div>
+          <h2 className="bebas proj-heading">PROJECTS.</h2>
+          <div className="mono proj-count">
+            08 PROJECTS // HARDWARE · BACKEND · FULLSTACK
+          </div>
+
+          {/* Filter bar */}
+          <div className="filter-bar">
+            <div className="filter-buttons">
+              {FILTERS.map(f => (
+                <button
+                  key={f}
+                  onClick={() => setActiveFilter(f)}
+                  className="mono"
+                  style={{
+                    fontSize: 10,
+                    padding: '8px 16px',
+                    background: 'transparent',
+                    border: `1px solid ${activeFilter === f ? '#FFD700' : 'rgba(255,255,255,0.12)'}`,
+                    color: activeFilter === f ? '#FFD700' : '#A0A0A0',
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    borderRadius: 0,
+                    transition: 'all 150ms linear',
+                  }}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
+          </div>
+        </motion.div>
 
         {/* Grid */}
         <motion.div layout className="proj-grid">

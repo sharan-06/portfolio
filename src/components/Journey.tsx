@@ -56,7 +56,7 @@ export default function Journey() {
     <section className="journey-section">
       <div style={{ maxWidth: 900, margin: '0 auto' }}>
         <div className="mono" style={{ fontSize: 11, color: '#FFD700', letterSpacing: '0.2em', marginBottom: 16 }}>
-          // TIMELINE
+          TIMELINE
         </div>
         <h2 className="bebas journey-heading">MY JOURNEY.</h2>
 

@@ -222,7 +222,7 @@ export default function Skills() {
 
   return (
     <section className="skills-section">
-      <div className="skills-label">// TECHNICAL STACK</div>
+      <div className="skills-label">TECHNICAL STACK</div>
       <div ref={mountRef} className="skills-canvas" />
     </section>
   )
