@@ -27,6 +27,10 @@ Personal portfolio of Sharavanan R, Electronics & Communication Engineering stud
 ```
 sharavanan-portfolio/
 ├── public/
+│   ├── favicon-16x16.png       # Favicon source variants (keep for reference)
+│   ├── favicon-32x32.png       # Copied to src/app/icon.png for serving
+│   ├── apple-touch-icon.png    # Copied to src/app/apple-icon.png for serving
+│   ├── site.webmanifest        # PWA manifest
 │   ├── sharavanan.webp         # Hero photo (WebP, ~40 KB)
 │   ├── Resume (2).pdf          # Downloadable resume
 │   ├── innsole.webp            # Project images (WebP)
@@ -44,6 +48,8 @@ sharavanan-portfolio/
 │   └── optimize-images.mjs    # PNG → WebP conversion script
 ├── src/
 │   ├── app/
+│   │   ├── icon.png            # SR favicon served with cache-busting hash (copied from public/favicon-32x32.png)
+│   │   ├── apple-icon.png      # iOS icon served via App Router (copied from public/apple-touch-icon.png)
 │   │   ├── layout.tsx          # Root layout, next/font, preload, metadata
 │   │   ├── page.tsx            # Page composition + dynamic imports + Lenis
 │   │   └── globals.css         # Global styles, CSS variables, responsive layout
