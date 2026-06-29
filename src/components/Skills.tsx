@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 
 interface SphereData {
@@ -60,8 +60,25 @@ function buildSphereCanvas(logoSrc: string): THREE.CanvasTexture {
 
 export default function Skills() {
   const mountRef = useRef<HTMLDivElement>(null)
+  const [shouldRender, setShouldRender] = useState(false)
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRender(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1 }
+    )
+    const section = document.getElementById('skills')
+    if (section) observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!shouldRender) return
     const mount = mountRef.current
     if (!mount) return
 
@@ -218,7 +235,7 @@ export default function Skills() {
         ;(sprite.material as THREE.Material).dispose(); texture.dispose()
       })
     }
-  }, [])
+  }, [shouldRender])
 
   return (
     <section className="skills-section">

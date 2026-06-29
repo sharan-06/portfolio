@@ -1,14 +1,16 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { ReactLenis } from '@studio-freight/react-lenis'
 import Navbar from '@/components/Navbar'
-import Hero from '@/components/Hero'
-import About from '@/components/About'
-import Skills from '@/components/Skills'
-import Projects from '@/components/Projects'
-import Journey from '@/components/Journey'
-import Contact from '@/components/Contact'
+import Hero   from '@/components/Hero'
 import ParallaxWrapper from '@/components/ParallaxWrapper'
+
+const About    = dynamic(() => import('@/components/About'),    { ssr: true  })
+const Skills   = dynamic(() => import('@/components/Skills'),   { ssr: false })
+const Projects = dynamic(() => import('@/components/Projects'), { ssr: true  })
+const Journey  = dynamic(() => import('@/components/Journey'),  { ssr: true  })
+const Contact  = dynamic(() => import('@/components/Contact'),  { ssr: true  })
 
 export default function Home() {
   return (

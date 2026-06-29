@@ -29,7 +29,7 @@ const projects: Project[] = [
     description: 'Peltier-based portable medical storage carrier with embedded temperature regulation and real-time thermal monitoring.',
     stack: ['Li-Po Battery', 'DC-DC Buck converter', 'Peltier Module', 'Hardware Debugging'],
     github: 'https://github.com/sharan-06/innsole',
-    image: '/innsole.png',
+    image: '/innsole.webp',
     featured: true,
   },
   {
@@ -55,7 +55,7 @@ const projects: Project[] = [
     description: 'Automated print job management and routing system with queue optimization.',
     stack: ['Python', 'NoSQL', 'Firebase', 'Next.js'],
     github: '#',
-    image: '/printe.png',
+    image: '/printe.webp',
     featured: false,
   },
   {
@@ -81,7 +81,7 @@ const projects: Project[] = [
     description: 'Real-time multiplayer trivia game with live scoring, room management, and leaderboard system.',
     stack: ['Next.js', 'Open-Trivia API'],
     github: 'https://github.com/sharan-06/High-Noon-Trivia',
-    image: '/highnoontrivia.png',
+    image: '/highnoontrivia.webp',
     featured: false,
   },
   {
@@ -94,7 +94,7 @@ const projects: Project[] = [
     description: 'Gamified personal productivity app with habit tracking, XP system, and progression mechanics.',
     stack: ['Google ML Training Kit', 'Flutter', 'Isar'],
     github: 'https://github.com/sharan-06/arise',
-    image: '/sololevelling.png',
+    image: '/sololevelling.webp',
     featured: false,
   },
   {
@@ -107,7 +107,7 @@ const projects: Project[] = [
     description: 'Crowd safety monitoring dashboard with real-time density visualization and alert system.',
     stack: ['Edge-AI', 'Next.js', 'ESP32'],
     github: 'https://github.com/i-am-sarath/crowd-shield',
-    image: '/crowdshield.png',
+    image: '/crowdshield.webp',
     featured: false,
   },
   {

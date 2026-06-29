@@ -140,9 +140,12 @@ export default function Hero() {
         transition={{ duration: 0.6, delay: 1.3 }}
       >
         <img
-          src="/sharavanan.png"
+          src="/sharavanan.webp"
           alt="Sharavanan R"
           className="hero-photo-img"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
       </motion.div>
 
